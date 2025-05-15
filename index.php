@@ -1,14 +1,9 @@
 <?php
-include 'db.php';
+require_once 'models/Dashboard.php';
 
-// Ambil jumlah buku
-$buku = $conn->query("SELECT COUNT(*) AS total FROM buku")->fetch_assoc();
-
-// Ambil jumlah member
-$member = $conn->query("SELECT COUNT(*) AS total FROM member")->fetch_assoc();
-
-// Ambil jumlah transaksi
-$transaksi = $conn->query("SELECT COUNT(*) AS total FROM transaksi")->fetch_assoc();
+$buku = Dashboard::totalBuku();
+$member = Dashboard::totalMember();
+$transaksi = Dashboard::totalTransaksi();
 ?>
 
 <!DOCTYPE html>
@@ -35,21 +30,21 @@ $transaksi = $conn->query("SELECT COUNT(*) AS total FROM transaksi")->fetch_asso
   <h1>📊 Dashboard Perpustakaan</h1>
 
   <div class="card">
-    <div class="count"><?= $buku['total'] ?></div>
+    <div class="count"><?= $buku ?></div>
     <div>Total Buku</div>
-    <a href="buku/list.php">Lihat Detail</a>
+    <a href="views/buku/list.php">Lihat Detail</a>
   </div>
 
   <div class="card">
-    <div class="count"><?= $member['total'] ?></div>
+    <div class="count"><?= $member ?></div>
     <div>Total Member</div>
-    <a href="member/list.php">Lihat Detail</a>
+    <a href="views/member/list.php">Lihat Detail</a>
   </div>
 
   <div class="card">
-    <div class="count"><?= $transaksi['total'] ?></div>
+    <div class="count"><?= $transaksi ?></div>
     <div>Total Transaksi</div>
-    <a href="transaksi/list.php">Lihat Detail</a>
+    <a href="views/transaksi/list.php">Lihat Detail</a>
   </div>
 
 </body>
